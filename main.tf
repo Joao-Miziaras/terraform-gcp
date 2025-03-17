@@ -28,13 +28,11 @@ variable "service_account_roles" {
   default     = ["roles/viewer"]
 }
 
-# 🔹 Criar uma Service Account no GCP
 resource "google_service_account" "sa" {
   account_id   = var.service_account_name
   display_name = "Service Account criada pelo Terraform"
 }
 
-# 🔹 Atribuir permissões à Service Account
 resource "google_project_iam_binding" "sa_roles" {
   for_each = toset(var.service_account_roles)
 
@@ -46,13 +44,11 @@ resource "google_project_iam_binding" "sa_roles" {
   ]
 }
 
-# 🔹 Criar chave privada para a Service Account
 resource "google_service_account_key" "sa_key" {
   service_account_id = google_service_account.sa.name
   key_algorithm      = "KEY_ALG_RSA_2048"
 }
 
-# 🔹 Outputs para exibir a SA e a chave privada
 output "service_account_email" {
   value = google_service_account.sa.email
 }
