@@ -38,3 +38,6 @@ terraform.rc
 
 
 .vault_credentials
+
+gcp-key.jsongcp-key.json
+gcp-key.json
